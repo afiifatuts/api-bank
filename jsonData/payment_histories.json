@@ -1,0 +1,84 @@
+{
+    "transaction": [
+        {
+            "id_transaction": "e0000f4d-ab0e-405e-bc9f-e821a95b8abc",
+            "amount": 100000,
+            "from_account": "user1",
+            "to_account": "user2",
+            "merchant": "BCA",
+            "timestamp": "2023-06-28 10:50:38.247531 +0700 WIB m=+282.199175706"
+        },
+        {
+            "id_transaction": "52037bc1-e068-47fa-93fe-7e841b01e12c",
+            "amount": 100,
+            "from_account": "user1",
+            "to_account": "user2",
+            "merchant": "BRI",
+            "timestamp": "2023-06-28 10:53:37.955825 +0700 WIB m=+461.906887077"
+        },
+        {
+            "id_transaction": "53a2470c-d339-400f-922b-5c2bb0c3e732",
+            "amount": 20000,
+            "from_account": "user1",
+            "to_account": "user2",
+            "merchant": "Dana",
+            "timestamp": "2023-06-28 10:54:30.223596 +0700 WIB m=+514.174487174"
+        },
+        {
+            "id_transaction": "a1aeb831-8f38-40c7-b02d-7d94e7a0a310",
+            "amount": 50000,
+            "from_account": "user2",
+            "to_account": "user4",
+            "merchant": "OVO",
+            "timestamp": "2023-06-28 11:05:12.854290 +0700 WIB m=+1145.805035001"
+        },
+        {
+            "id_transaction": "6c4e2f29-4da3-4a06-b92a-64166072e0e0",
+            "amount": 75000,
+            "from_account": "user2",
+            "to_account": "user5",
+            "merchant": "GoPay",
+            "timestamp": "2023-06-28 11:10:21.193385 +0700 WIB m=+1394.144227621"
+        },
+        {
+            "id_transaction": "dfef22c6-3f43-41a0-9fa7-835d99266bca",
+            "amount": 30000,
+            "from_account": "user6",
+            "to_account": "user1",
+            "merchant": "LinkAja",
+            "timestamp": "2023-06-28 11:15:47.664432 +0700 WIB m=+1660.615102854"
+        },
+        {
+            "id_transaction": "7f4de3e3-84b7-44df-9f37-41f4a5c4a92b",
+            "amount": 120000,
+            "from_account": "user2",
+            "to_account": "user1",
+            "merchant": "BCA",
+            "timestamp": "2023-06-28 11:20:59.902168 +0700 WIB m=+1922.852778064"
+        },
+        {
+            "id_transaction": "9f8c6975-7e5e-4e9a-a9f2-694523b51c13",
+            "amount": 250000,
+            "from_account": "user1",
+            "to_account": "user2",
+            "merchant": "BRI",
+            "timestamp": "2023-06-28 11:25:18.780736 +0700 WIB m=+2181.731395709"
+        },
+        {
+            "id_transaction": "2f098532-2e4f-4451-b9f7-8a7809f7a843",
+            "amount": 80000,
+            "from_account": "user1",
+            "to_account": "user6",
+            "merchant": "Dana",
+            "timestamp": "2023-06-28 11:30:37.112176 +0700 WIB m=+2439.062861447"
+        },
+        {
+            "id_transaction": "9e7a091a-78b2-4ddc-85fc-2d1f5ffba6e4",
+            "amount": 150000,
+            "from_account": "user2",
+            "to_account": "user1",
+            "merchant": "OVO",
+            "timestamp": "2023-06-28 11:35:52.334731 +0700 WIB m=+2704.285456861"
+        }
+    ]
+}
