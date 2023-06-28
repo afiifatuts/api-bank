@@ -17,7 +17,8 @@ func AuthenticationMiddleware(jwtMaker *helper.JWTMaker) gin.HandlerFunc {
 		token := ctx.GetHeader("Authorization")
 		if token == "" {
 			ctx.JSON(http.StatusUnauthorized, gin.H{
-				"error": "Missing authorization token",
+				"success": false,
+				"message": "Missing authorization token",
 			})
 			ctx.Abort()
 			return
@@ -26,7 +27,8 @@ func AuthenticationMiddleware(jwtMaker *helper.JWTMaker) gin.HandlerFunc {
 		payload, err := jwtMaker.VerifyToken(token)
 		if err != nil {
 			ctx.JSON(http.StatusUnauthorized, gin.H{
-				"error": "Invalid or expired token",
+				"success": false,
+				"message": "Invalid or expired token",
 			})
 			ctx.Abort()
 			return
@@ -52,7 +54,8 @@ func Login(jwtMaker *helper.JWTMaker) gin.HandlerFunc {
 
 			if !match {
 				ctx.JSON(http.StatusUnauthorized, gin.H{
-					"error": "Wrong password/username",
+					"success": false,
+					"message": "Wrong password/username",
 				})
 				ctx.Abort()
 				return
@@ -62,7 +65,8 @@ func Login(jwtMaker *helper.JWTMaker) gin.HandlerFunc {
 			token, err := jwtMaker.CreateToken(username, time.Minute*10) // Set token expiration time
 			if err != nil {
 				ctx.JSON(http.StatusInternalServerError, gin.H{
-					"error": "Failed to generate token",
+					"success": false,
+					"message": "Failed to generate token",
 				})
 				ctx.Abort()
 				return
@@ -75,13 +79,14 @@ func Login(jwtMaker *helper.JWTMaker) gin.HandlerFunc {
 			}
 
 			ctx.JSON(http.StatusOK, gin.H{
-				"status":    "Success",
+				"success":   true,
 				"message":   "Login Successful!",
 				"user_info": data,
 			})
 		} else {
 			ctx.JSON(http.StatusUnauthorized, gin.H{
-				"error": "Invalid username",
+				"success": false,
+				"message": "Invalid username",
 			})
 		}
 	}
@@ -96,14 +101,14 @@ func Logout() gin.HandlerFunc {
 			authPayload.ExpiredAt = time.Now()
 			fmt.Println(authPayload.ExpiredAt)
 			ctx.JSON(http.StatusOK, gin.H{
-				"status":    authPayload.IsLogin,
+				"success":   true,
 				"user_info": authPayload.Username,
 				"message":   "Logout Successful!",
 			})
 		} else {
 			ctx.JSON(http.StatusUnauthorized, gin.H{
-
-				"error": "Not logged in",
+				"success": false,
+				"message": "Not logged in",
 			})
 		}
 	}
@@ -121,7 +126,7 @@ func Payment() gin.HandlerFunc {
 		err := authPayload.Valid()
 		if err != nil {
 			ctx.JSON(http.StatusUnauthorized, gin.H{
-				"status":  false,
+				"success": false,
 				"message": "Token has expired",
 			})
 			return
@@ -131,7 +136,7 @@ func Payment() gin.HandlerFunc {
 		isValidUser := helper.GetUser(toAccount)
 		if isValidUser == (model.User{}) {
 			ctx.JSON(http.StatusBadRequest, gin.H{
-				"status":  false,
+				"success": false,
 				"message": "Invalid User",
 			})
 			return
@@ -157,7 +162,7 @@ func Payment() gin.HandlerFunc {
 		}
 
 		ctx.JSON(http.StatusOK, gin.H{
-			"status":      true,
+			"success":     true,
 			"message":     "Payment Success",
 			"transaction": data,
 		})
