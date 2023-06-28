@@ -15,31 +15,56 @@ cd api-bank
 go run main.go
 ```
 
-For login you can use :
+**API Endpoint**
+
+```sh
+POST /login
+```
+
+```sh
+POST /payment
+```
+
+```sh
+POST /logout
+```
+
+**For login example you can use :**
 
 ```sh
 username : user1
 password : secret
 ```
 
-```sh
-username : user2
-password : secret
-```
+OR
 
 ```sh
 username : user4
 password : password
 ```
 
-```sh
-username : user5
-password : password
-```
+**For payment you must input :**
+
+Authorization Headers :
 
 ```sh
-username : user6
-password : password
+Authorization : jwt_token
+```
+
+Request body form-data
+
+```sh
+to_account : username
+amount : transfer_amount
+merchant : merchant_name
+```
+
+**For logout you must input :**
+
+Authorization Headers :
+
+```sh
+Authorization : jwt_token
 ```
 
 ## API documentation :
