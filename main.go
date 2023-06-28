@@ -1,7 +1,10 @@
 package main
 
-import "github.com/afiifatuts/bankmnc/handler"
+import (
+	"github.com/afiifatuts/bankmnc/router"
+)
 
 func main() {
-	handler.Handler()
+	r := router.StartApp()
+	r.Run("localhost:8000")
 }

@@ -12,35 +12,7 @@ import (
 	"github.com/google/uuid"
 )
 
-func AuthenticationMiddleware(jwtMaker *helper.JWTMaker) gin.HandlerFunc {
-	return func(ctx *gin.Context) {
-		token := ctx.GetHeader("Authorization")
-		if token == "" {
-			ctx.JSON(http.StatusUnauthorized, gin.H{
-				"success": false,
-				"message": "Missing authorization token",
-			})
-			ctx.Abort()
-			return
-		}
-
-		payload, err := jwtMaker.VerifyToken(token)
-		if err != nil {
-			ctx.JSON(http.StatusUnauthorized, gin.H{
-				"success": false,
-				"message": "Invalid or expired token",
-			})
-			ctx.Abort()
-			return
-		}
-
-		// Token is valid, proceed to the next handler
-		ctx.Set("payload", payload)
-		ctx.Next()
-	}
-}
-
-func Login(jwtMaker *helper.JWTMaker) gin.HandlerFunc {
+func Login() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		username := ctx.PostForm("username")
 		password := ctx.PostForm("password")
@@ -62,7 +34,7 @@ func Login(jwtMaker *helper.JWTMaker) gin.HandlerFunc {
 			}
 
 			req.IsLogin = true
-			token, err := jwtMaker.CreateToken(username, time.Minute*10) // Set token expiration time
+			token, err := helper.GenerateToken(username, time.Minute*10) // Set token expiration time
 			if err != nil {
 				ctx.JSON(http.StatusInternalServerError, gin.H{
 					"success": false,
@@ -142,8 +114,8 @@ func Payment() gin.HandlerFunc {
 			return
 		}
 
-		// Create a new PaymentHistory object
-		payment := model.PaymentHistory{
+		// Create a new Transaction object
+		payment := model.Transaction{
 			ID:          uuid.New().String(),
 			FromAccount: authPayload.Username,
 			ToAccount:   toAccount,
@@ -167,22 +139,4 @@ func Payment() gin.HandlerFunc {
 			"transaction": data,
 		})
 	}
-}
-
-func Handler() {
-	// Create JWTMaker instance with secret key
-	jwtMaker, err := helper.NewJWTMaker("12345678901234567890123456789012")
-	if err != nil {
-		fmt.Println("Failed to create JWTMaker:", err)
-		return
-	}
-
-	router := gin.Default()
-
-	router.POST("/login", Login(jwtMaker))
-	router.Use(AuthenticationMiddleware(jwtMaker))
-	router.POST("/logout", Logout())
-	router.POST("/payment", Payment())
-
-	router.Run("localhost:8000")
 }

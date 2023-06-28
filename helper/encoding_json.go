@@ -6,18 +6,7 @@ import (
 	"os"
 
 	"github.com/afiifatuts/bankmnc/model"
-	"golang.org/x/crypto/bcrypt"
 )
-
-func HashPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
-	return string(bytes), err
-}
-
-func CheckPasswordHash(pw, hash string) bool {
-	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(pw))
-	return err == nil
-}
 
 func IsRegistered(username string) bool {
 	jsonData, err := os.Open("jsonData/user.json")

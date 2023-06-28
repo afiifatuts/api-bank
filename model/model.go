@@ -11,11 +11,15 @@ type User struct {
 	IsLogin  bool   `json:"is_login"`
 }
 
-type PaymentHistory struct {
+type Transaction struct {
 	ID          string  `json:"id"`
 	FromAccount string  `json:"from_account"`
 	ToAccount   string  `json:"to_account"`
 	Merchant    string  `json:"merchant"`
 	Amount      float64 `json:"amount"`
 	Timestamp   string  `json:"timestamp"`
+}
+
+type TransactionsHistory struct {
+	Transactions []Transaction `json:"transactions"`
 }
