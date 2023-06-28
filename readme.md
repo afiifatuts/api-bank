@@ -17,15 +17,15 @@ go run main.go
 
 **API Endpoint**
 
-```sh
+```http
 POST /login
 ```
 
-```sh
+```http
 POST /payment
 ```
 
-```sh
+```http
 POST /logout
 ```
 
