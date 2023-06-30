@@ -123,20 +123,11 @@ func Payment() gin.HandlerFunc {
 			Amount:      float64(amountInt),
 			Timestamp:   time.Now().String(),
 		}
-
-		data := gin.H{
-			"id_transaction": payment.ID,
-			"amount":         payment.Amount,
-			"from_account":   payment.FromAccount,
-			"to_account":     payment.ToAccount,
-			"merchant":       payment.Merchant,
-			"timestamp":      payment.Timestamp,
-		}
-
+		
 		ctx.JSON(http.StatusOK, gin.H{
 			"success":     true,
 			"message":     "Payment Success",
-			"transaction": data,
+			"transaction": payment,
 		})
 	}
 }
